@@ -1,0 +1,32 @@
+{% extends "ORM_App/base.html" %}
+
+{% block title %} Employees..{% endblock %}
+
+{% block body %}
+    <h1>Employee Information Dash Board </h1><hr>
+
+    {% if employees %}
+        <table class="table">
+            <thead>
+                <tr>
+                <th>Employee Number </th>
+                <th>Employee Name </th>
+                <th>Employee Salary </th>
+                <th>Employee Address </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee.eno }}</td>
+                        <td>{{ employee.ename }}</td>
+                        <td>{{ employee.esal }}</td>
+                        <td>{{ employee.eaddr }}</td>
+                    </tr>
+                {% endfor %}                
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No Employees</h2>
+    {% endif %}
+{% endblock body %}
