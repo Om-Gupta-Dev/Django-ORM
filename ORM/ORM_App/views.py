@@ -41,6 +41,37 @@ def display_view(request):
     
     # Range Selector 
     # Syntax --> Model.objects.filter(FieldName__range=(start , end))
+    
+    # Using Multiple Conditions to filter -------------------------------
+    # Using OR condition 
+    # Method 1
+    # queryset_1|queryset_2
+    # Ex employees = Employee.objects.filter(esal__gt = 123456789 )|Employee.objects.filter(ename__startswith="J")
+    
+    # Method 2
+    # from django.db.models import Q
+    # Q(Condition1)|Q(condition2)
+    # Ex employees = Employee.objects.filter(Q(esal__gt = 123456789 )|Q(ename__startswith="J"))
+    
+    # Using AND condition 
+    # Method 1
+    # model.objects.filter(condition1 , condition2)
+    
+    # Method 2
+    # queryset_1&queryset_2
+    # Ex employees = Employee.objects.filter(esal__gt = 123456789 )&Employee.objects.filter(ename__startswith="J")
+    
+    # Method 2
+    # from django.db.models import Q
+    # Q(Condition1)&Q(condition2)
+    # Ex employees = Employee.objects.filter(Q(esal__gt = 123456789 )&Q(ename__startswith="J"))
+    
+    # How to Implement NOT queries 
+    # Method 1
+    # model.objects.exclude(condition) Exclude all values satisfying the given condition 
+    # Method 2
+    # from django.db.models import Q 
+    # model.objects.filter(~Q(condition))
 
     employees = Employee.objects.filter(ename__in =['derrick Donovan', 'Joel Howard'])
 
