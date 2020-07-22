@@ -72,6 +72,28 @@ def display_view(request):
     # Method 2
     # from django.db.models import Q 
     # model.objects.filter(~Q(condition))
+    
+    # How to Implement UNION Operation for Querysets
+    # UNION Operation is like OR Operation But Very Helpful when working with multiple tables 
+    # Also Here is a Twist in The Case and that is For performing UNION Operation to different Querysets 
+    # Both Querysets Should contain Same Columns and Same Number of Columns Otherwise Error
+    # But we can select particular fields and perform Operations using .values_list(fieldnames)
+    # QuerySet3 = QuerySet1.Union(QuerySet2)
+    
+    # Selecting Particular Fields From QuerySet
+    # Method 1  Using values_list()
+    # Syntax --> model.objects.all().values_list('fieldname1' , 'fieldname2', ....)
+    # The values_list() method returns a QuerySet containing tuples:
+    # <QuerySet [(1,), (2,)]>
+    
+    # Method 2  Using values()
+    # Syntax --> model.objects.all().values('fieldname1' , 'fieldname2', ....)
+    # NOTE: The values() method returns a QuerySet containing dictionaries:
+    # <QuerySet [{'comment_id': 1}, {'comment_id': 2}]>
+
+    # Method 3  Using only()
+    # Syntax --> model.objects.all().values_list('id' , 'fieldname1' , 'fieldname2', ....) Gives ID Also By Default
+    
 
     employees = Employee.objects.filter(ename__in =['derrick Donovan', 'Joel Howard'])
 
