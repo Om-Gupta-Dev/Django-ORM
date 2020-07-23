@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from django.db.models.functions import Lower
+
 from ORM_App.models import Employee
 # Create your views here.
 
@@ -94,9 +96,60 @@ def display_view(request):
     # Method 3  Using only()
     # Syntax --> model.objects.all().values_list('id' , 'fieldname1' , 'fieldname2', ....) Gives ID Also By Default
     
+    # Adding Record to Database
+    # Syntax --> object = model(field1='value' , field2=value, ....)
+    # Object.save()
+    
+    # Creating Multiple Record at once 
+    # object1 = model(field1='value' , field2=value, ....)
+    # object2 = model(field1='value' , field2=value, ....)
+    # object3 = model(field1='value' , field2=value, ....)
+    # object4 = model(field1='value' , field2=value, ....)
+    # model.objects.bulk_create([object1,object2,object3,object4])
+    
+    # Deleting Record from Database NOTE: Here NO Rollback is there So Take Care Before Deleting
+    # 1. get Object  2. Delete Object From Database  
+    # 1. object = model.objects.get(field=Value)  Any One Field To Extract 
+    # 2. object.delete()
+    
+    # Deleting Multiple Records From Database
+    # 1. get Object  2. Delete Object From Database  
+    # 1. object = model.objects.filter(condition)  Any One Field To Extract 
+    # Ex. object = Employee.objects.filter(esal__gt=15000)
+    # 2. object.delete()
+    
+    # Deleting All Records From Database also called TRUNCATE Operation
+    # 1. get All Object  2. Delete All Objects From Database  
+    # 1. object = model.objects.all()
+    # Ex. object = Employee.objects.all()
+    # 2. object.delete()
+    # OR Directly model.bojects.all().delete()
+    
+    # How to Update Record
+    # 1. Get Object  2. Update Record  3. Save Changes
+    # 1. object = model.objects.get(field=Value)  Any One Field To Extract 
+    # 2. object.FieldName = NewValue
+    # 3. object.save()
+    
+    # How To Sort QuerySet --------------NOTE: QuerySet is Always List Type
+    # objects = model.objects.all().order_by('FieldName') By Default Ascending Order FieldName
+    # objects = model.objects.all().order_by('-FieldName') Sort By Descending Order FieldName
+    
+    # objects = model.objects.all().order_by('-FieldName')[0] Highest FieldName Only 
+    # objects = model.objects.all().order_by('FieldName')[0] Lowest FieldName Only 
+    
+    # objects = model.objects.all().order_by('-FieldName')[0:3] Top Three FieldName Only Using Slice Operator
+    # objects = model.objects.all().order_by('FieldName')[0:3] Last Three FieldName Only Using Slice Operator
+    
+    # NOTE: If We apply on Order by Alphabetical field then the ordering will be done on the basis of UNICode Values
+    # That is UNOCodes like A-->65, B-->66 BUT a-->97, b-->98
+    # Thats Why a(Small Characters(Starting)) comes After Capital Alphabets(Starting)
+     
+    # To Fix This We Can use Lower Function from django.db.models.functions
+    # from django.db.models.functions import Lower
+    # objects = model.objects.all().order_by(Lower('FieldName'))
 
-    employees = Employee.objects.filter(ename__in =['derrick Donovan', 'Joel Howard'])
-
+    employees = Employee.objects.all().order_by(Lower('ename'))
 
     my_dict = {'employees':employees}
     return render(request , 'ORM_App/index.html' , my_dict)
