@@ -4,5 +4,6 @@
         "titleBar.activeBackground": "#333197",
         "titleBar.activeForeground": "#FCFCFE"
     },
-    "python.pythonPath": "C:\\Program Files\\Python38\\python.exe"
+    "python.pythonPath": "C:\\Program Files\\Python38\\python.exe",
+    "editor.renderLineHighlight": "all"
 }

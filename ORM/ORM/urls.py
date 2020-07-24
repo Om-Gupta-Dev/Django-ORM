@@ -18,9 +18,11 @@ from django.urls import path , include
 
 from ORM_App import urls as OrmAppUrls
 from ModelInheritence import urls as ModelUrls
+from ModelManager import urls as ManagerUrls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('orm' , include(OrmAppUrls)),
-    path('' , include(ModelUrls)),
+    path('model' , include(ModelUrls)),
+    path('' , include(ManagerUrls)),
 ]

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ORM_App',
-    'ModelInheritence'
+    'ModelInheritence',
+    'ModelManager',
 ]
 
 MIDDLEWARE = [

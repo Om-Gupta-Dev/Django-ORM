@@ -5,7 +5,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE' , 'ORM.settings')
 import django
 django.setup()
 
-from ORM_App.models import *
+from ModelManager.models import *
 
 fake = Faker()
 
