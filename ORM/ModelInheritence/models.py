@@ -42,4 +42,42 @@ class Teacher1(ContactInfo1):
     Subject = models.CharField(max_length=64)
     Salary = models.FloatField()
     
+
+# 3. Proxy Table Inheritence 
+
+
+# 4. Multiple Inheritence 
+# This is same as 2. Multiple Table Inheritence BUT Here multiple parents are used 
+# NOTE: here we will get error as same id field in parent tables 
+# To Solve this error make any one primary key own defined fields   
+
+class Parent1(models.Model):
+    Name = models.CharField(max_length=64)
+    Email = models.EmailField(primary_key=True)
+    Address = models.CharField(max_length=264)
+
+class Parent2(models.Model):
+    RollNo = models.IntegerField(primary_key=True)
+    Marks = models.IntegerField()
+    
+class Child1(Parent1,Parent2):
+    CodeName = models.CharField(max_length=64)
+    Salary = models.FloatField()
+    
+    
+# 5. MultiLevel Inheritence
+# In This type of Inheritence There is a series inheritence Parent->Child->SubChild
+
+class Parent(models.Model):
+    Name = models.CharField(max_length=64)
+    Email = models.EmailField(primary_key=True)
+    Address = models.CharField(max_length=264)
+
+class Child(Parent):
+    RollNo = models.IntegerField(primary_key=True)
+    Marks = models.IntegerField()
+    
+class SubChild(Child):
+    CodeName = models.CharField(max_length=64)
+    Salary = models.FloatField()
     
