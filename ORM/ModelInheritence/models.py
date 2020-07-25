@@ -43,8 +43,35 @@ class Teacher1(ContactInfo1):
     Salary = models.FloatField()
     
 
-# 3. Proxy Table Inheritence 
+# 3. Proxy Model Inheritence 
+# Proxy --> Duplicate View For The same(Existing) Table/Model 
+# In this inheritence we define different view for the same table using Custom Model Managers
 
+class CustomManager1(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().order_by('Name')       # OverWrites default all() method to get all records from database
+                                                            # Calling Parent Class Method by using super()
+class CustomManager2(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().order_by('RollNo')       # OverWrites default all() method to get all records from database
+                                                            # Calling Parent Class Method by using super()
+        
+
+class ContactInfo(models.Model):
+    Name = models.CharField(max_length=64)
+    Email = models.EmailField()
+    Address = models.CharField(max_length=264)
+    RollNo = models.IntegerField()
+    Marks = models.IntegerField()
+    objects = CustomManager1()
+
+# We Can Create any Numbers of Proxy Models
+class ProxyContactInfo(ContactInfo):
+    objects = CustomManager2()
+    
+    class Meta:
+        proxy = True
+    
 
 # 4. Multiple Inheritence 
 # This is same as 2. Multiple Table Inheritence BUT Here multiple parents are used 

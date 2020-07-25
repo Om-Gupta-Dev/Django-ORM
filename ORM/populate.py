@@ -7,6 +7,8 @@ django.setup()
 
 from ModelManager.models import *
 
+from ModelInheritence.models import *
+
 fake = Faker()
 
 def populate(n):
@@ -20,4 +22,20 @@ def populate(n):
                                 eno = feno ,
                                 eaddr = fadd )
     
-populate(10)
+# populate(10)
+
+def populate(n):
+    for i in range(n):
+        fname = fake.name()
+        fRoll = int(str(np.random.randint(10,99))+str(np.random.randint(0,9)))
+        fMarks = int(str(np.random.randint(10,99))+str(np.random.randint(0,9)))
+        femail = fake.email()
+        fadd = fake.address()
+        ContactInfo.objects.get_or_create(Name = fname , 
+                                Marks = fMarks , 
+                                Address = fadd ,
+                                Email = femail , 
+                                RollNo = fRoll , 
+                                )
+    
+# populate(10)

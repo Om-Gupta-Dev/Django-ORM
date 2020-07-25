@@ -4,7 +4,7 @@ from ModelManager.models import Employee
 # Create your views here.
 
 def index(request):
-    Employees = Employee.objects.all()
+    Employees = Employee.objects.esal_range(9027466493.0,9739584910.0)
     return render(request , 'ModelManager/home.html' , {'employees':Employees})
 
 # Model Manager is the Medium to communicate to the database 

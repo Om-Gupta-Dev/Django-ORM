@@ -41,7 +41,7 @@ def display_view(request):
     # Syntax --> Model.objects.filter(FieldName__endswith=value) if value is str Case matters Case sensitive
     # Syntax --> Model.objects.filter(FieldName__iendswith=value) if value is str Don't Case matters Case insensitive
     
-    # Range Selector 
+    # Range Selector ----------NOTE: for int fields provide small value first then large value to select in range 
     # Syntax --> Model.objects.filter(FieldName__range=(start , end))
     
     # Using Multiple Conditions to filter -------------------------------
